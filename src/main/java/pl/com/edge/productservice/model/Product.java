@@ -1,4 +1,4 @@
-package pl.com.edge.productservice;
+package pl.com.edge.productservice.model;
 
 
 import lombok.Data;

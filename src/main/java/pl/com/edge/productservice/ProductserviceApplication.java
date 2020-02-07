@@ -3,6 +3,9 @@ package pl.com.edge.productservice;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import pl.com.edge.productservice.model.Product;
+import pl.com.edge.productservice.model.Type;
+import pl.com.edge.productservice.repositories.ProductRepository;
 
 @SpringBootApplication
 public class ProductserviceApplication implements CommandLineRunner {
