@@ -2,7 +2,7 @@ package pl.com.edge.productservice.controllers;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.com.edge.productservice.controllers.DTOS.ProductDTO;
+import pl.com.edge.productservice.DTOS.ProductDTO;
 import pl.com.edge.productservice.services.ProductService;
 
 import java.util.NoSuchElementException;

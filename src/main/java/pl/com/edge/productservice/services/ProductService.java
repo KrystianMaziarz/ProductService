@@ -1,7 +1,7 @@
 package pl.com.edge.productservice.services;
 
 import org.springframework.stereotype.Service;
-import pl.com.edge.productservice.controllers.DTOS.ProductDTO;
+import pl.com.edge.productservice.DTOS.ProductDTO;
 import pl.com.edge.productservice.model.Product;
 import pl.com.edge.productservice.repositories.ProductRepository;
 

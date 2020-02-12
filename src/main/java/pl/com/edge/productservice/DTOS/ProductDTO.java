@@ -1,4 +1,4 @@
-package pl.com.edge.productservice.controllers.DTOS;
+package pl.com.edge.productservice.DTOS;
 
 
 import lombok.Data;
