@@ -13,7 +13,6 @@ import pl.com.edge.productservice.repositories.ProductRepository;
 import pl.com.edge.productservice.services.ProductService;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ProductServiceTest {
@@ -28,86 +27,83 @@ public class ProductServiceTest {
     }
 
     @Test
-    public void testShouldFindProductByName() {
+    public void testShouldReturnOneProductWithCounter1() {
         //given
-        Product excpected = new Product("Stolik", "Opis", Type.MALE,5.0);
-        List<Product> products = new ArrayList<>();
-        products.add(excpected);
+        Product product1 = new Product("stolik", "kolor dąb sonoma", Type.MALE, 200.0);
+        Product product2 = new Product("kanapa", "sprężyny faliste , 3 poduszki", Type.MALE, 300.0);
+        Product product3 = new Product("telewizor", "nowy", Type.MALE, 400.0);
+        ArrayList<Product> products = new ArrayList<>();
         Mockito.when(productRepository.getProducts()).thenReturn(products);
-        //when
-        Product result = productService.findProductByName("stolik");
-        //then
-        Assert.assertEquals(excpected,result);
-
-    }
-
-    @Test
-    public void testShouldFindProductByNameButExpectedIsWrong() {
-        //given
-        Product excpected = new Product("Stolik", "opis", Type.MALE,5.0);
-        List<Product> products = new ArrayList<>();
-        products.add(excpected);
-        Mockito.when(productRepository.getProducts()).thenReturn(products);
-        //when
-        Product result = productService.findProductByName("drzewo");
-        //then
-        Assert.assertNotEquals(excpected,result);
-
-    }
-    @Test
-    public void testShouldFindProductByNameButPriceIsNull() {
-        //given
-        Product excpected = new Product("Stolik", "Opis", Type.MALE, null);
-        List<Product> products = new ArrayList<>();
-        products.add(excpected);
-        Mockito.when(productRepository.getProducts()).thenReturn(products);
-        //when
-        Double result = productService.findProductByName("stolik").getDiscountPrice();
-        //then
-        Assert.assertEquals(excpected.getDiscountPrice(),result);
-
-    }
-
-    @Test
-    public void testShouldFindAllProducts() {
-        //given
-        Product product1 = new Product("Stolik", "Opis", Type.MALE, 125.0);
-        Product product2 = new Product("Kanapka", "Opis123", Type.FEMALE, 345.0);
-        Product product3 = new Product("Drzewo", "Opis3456", Type.KID, null);
-        List <Product> products = new ArrayList<>();
         products.add(product1);
         products.add(product2);
         products.add(product3);
-        Mockito.when(productRepository.getProducts()).thenReturn(products);
+        int exceptedCounter = 1;
         //when
-        List<Product> resultList = productService.findAll();
-
+        productService.findProductByName("kanapa");
         //then
-        Assert.assertEquals(resultList.get(0), product1);
-        Assert.assertEquals(resultList.get(1), product2);
-        Assert.assertEquals(resultList.get(2), product3);
-
+        Assert.assertEquals(exceptedCounter, product2.getCounter());
 
     }
+
     @Test
-    public void testShouldFindAllProductsButExpectedIsWrong() {
+    public void testShouldReturnOneProductWithCounterButExceptedCounterIsWrong() {
         //given
-        Product product1 = new Product("Stolik", "Opis", Type.MALE, 125.0);
-        Product product2 = new Product("Kanapka", "Opis123", Type.FEMALE, 345.0);
-        Product product3 = new Product("Drzewo", "Opis3456", Type.KID, null);
-        List <Product> products = new ArrayList<>();
+        Product product1 = new Product("stolik", "kolor dąb sonoma", Type.MALE, 200.0);
+        Product product2 = new Product("kanapa", "sprężyny faliste , 3 poduszki", Type.MALE, 300.0);
+        Product product3 = new Product("telewizor", "nowy", Type.MALE, 400.0);
+        ArrayList<Product> products = new ArrayList<>();
+        Mockito.when(productRepository.getProducts()).thenReturn(products);
         products.add(product1);
         products.add(product2);
         products.add(product3);
-        Mockito.when(productRepository.getProducts()).thenReturn(products);
+        int exceptedCounter = 5;
         //when
-        List<Product> resultList = productService.findAll();
-
+        productService.findProductByName("kanapa");
         //then
-        Assert.assertNotEquals(resultList.get(0), product2);
-        Assert.assertNotEquals(resultList.get(1), product3);
-        Assert.assertNotEquals(resultList.get(2), product1);
+        Assert.assertNotEquals(exceptedCounter, product2.getCounter());
+
+    }
+
+
+    @Test
+    public void testShouldReturnOneProductWithPriceAfterDiscount() {
+        //given
+        Product product1 = new Product("stolik", "kolor dąb sonoma", Type.MALE, 200.0);
+        Product product2 = new Product("kanapa", "sprężyny faliste , 3 poduszki", Type.MALE, 300.0);
+        Product product3 = new Product("telewizor", "nowy", Type.MALE, 400.0);
+        ArrayList<Product> products = new ArrayList<>();
+        Mockito.when(productRepository.getProducts()).thenReturn(products);
+        products.add(product1);
+        products.add(product2);
+        products.add(product3);
+        Double exceptedPriceAfterDiscount = product2.getPrice() * 0.95;
+        //when
+        productService.findProductByName("kanapa");
+        //then
+        Assert.assertEquals(exceptedPriceAfterDiscount, product2.getDiscountPrice());
 
 
     }
+
+    @Test
+    public void testShouldReturnOneProductWithPriceAfterDiscountButExceptedPriceAfterDiscountIsWrong() {
+        //given
+        Product product1 = new Product("stolik", "kolor dąb sonoma", Type.MALE, 200.0);
+        Product product2 = new Product("kanapa", "sprężyny faliste , 3 poduszki", Type.MALE, 300.0);
+        Product product3 = new Product("telewizor", "nowy", Type.MALE, 400.0);
+        ArrayList<Product> products = new ArrayList<>();
+        Mockito.when(productRepository.getProducts()).thenReturn(products);
+        products.add(product1);
+        products.add(product2);
+        products.add(product3);
+        Double exceptedPriceAfterDiscount = product2.getPrice() * 0.50;
+        //when
+        productService.findProductByName("kanapa");
+        //then
+        Assert.assertNotEquals(exceptedPriceAfterDiscount, product2.getDiscountPrice());
+
+
+    }
+
+
 }
