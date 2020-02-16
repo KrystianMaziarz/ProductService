@@ -14,13 +14,12 @@ public class ProductCounterService {
 
     }
 
-     Product setCounterProduct(Product product) {
+    public Product setCounterProduct(Product product) {
 
         product.getCounter().addCounter();
 
         productRepository.save(product);
-
-       return product;
+        return product;
 
     }
 }

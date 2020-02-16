@@ -1,130 +1,111 @@
+
 package pl.com.edge.productservice;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
 import pl.com.edge.productservice.model.Product;
 import pl.com.edge.productservice.model.Type;
 import pl.com.edge.productservice.repositories.ProductRepository;
-import pl.com.edge.productservice.services.ProductService;
+import pl.com.edge.productservice.services.PriceCalculatorService;
+import pl.com.edge.productservice.services.ProductCounterService;
 
-import java.util.ArrayList;
 
-@RunWith(MockitoJUnitRunner.class)
+
 public class ProductServiceTest {
 
-    @Mock
-    private ProductRepository productRepository;
-    private ProductService productService;
-}
-   /* @Before
-    public void setUp() throws Exception {
-        productService = new ProductService(productRepository);
-  }
+    private ProductRepository productRepository = Mockito.mock(ProductRepository.class);
 
-
-*/
-/*
-
-  @Test
-    public void testShouldReturnOneProductWithCounter1() {
+    @Test
+    public void testShouldReturnTrueToCounterAndExceptedCounter() {
         //given
-        Product product1 = new Product("stolik", "kolor dąb sonoma", Type.MALE, 200.0);
-        Product product2 = new Product("kanapa", "sprężyny faliste , 3 poduszki", Type.MALE, 300.0);
-        Product product3 = new Product("telewizor", "nowy", Type.MALE, 400.0);
-        ArrayList<Product> products = new ArrayList<>();
-        Mockito.when(productRepository.getProducts()).thenReturn(products);
-        products.add(product1);
-        products.add(product2);
-        products.add(product3);
+        Product product = new Product("Stolik", "Nowy", Type.MALE, 500.0);
+        productRepository.save(product);
+        ProductCounterService productCounterService = new ProductCounterService(productRepository);
+        //when
+        productCounterService.setCounterProduct(product);
+
         int exceptedCounter = 1;
-        //when
-        productService.findProductByName("kanapa");
         //then
-        Assert.assertEquals(exceptedCounter, product2.getCounter());
-
+        Assert.assertEquals(exceptedCounter, product.getCounter().getNumberOfCounter());
 
 
     }
 
-
-
-
     @Test
-    public void testShouldReturnOneProductWithCounterButExceptedCounterIsWrong() {
+    public void testShouldReturnFalseBecauseExceptedCounterIsWrong () {
         //given
-        Product product1 = new Product("stolik", "kolor dąb sonoma", Type.MALE, 200.0);
-        Product product2 = new Product("kanapa", "sprężyny faliste , 3 poduszki", Type.MALE, 300.0);
-        Product product3 = new Product("telewizor", "nowy", Type.MALE, 400.0);
-        ArrayList<Product> products = new ArrayList<>();
-        Mockito.when(productRepository.getProducts()).thenReturn(products);
-        products.add(product1);
-        products.add(product2);
-        products.add(product3);
+        Product product = new Product("Stolik", "Nowy", Type.MALE, 500.0);
+        productRepository.save(product);
+        ProductCounterService productCounterService = new ProductCounterService(productRepository);
+        //when
+        productCounterService.setCounterProduct(product);
+
         int exceptedCounter = 5;
-        //when
-        productService.findProductByName("kanapa");
         //then
-        Assert.assertNotEquals(exceptedCounter, product2.getCounter());
+        Assert.assertNotEquals(exceptedCounter, product.getCounter().getNumberOfCounter());
 
 
+    }
+    @Test
+    public void testShouldReturnPriceAfter5PercentDiscount () {
+        //given
+        Product product = new Product("Wazon", "Stary", Type.FEMALE, 2500.0);
+        productRepository.save(product);
+        PriceCalculatorService priceCalculatorService = new PriceCalculatorService();
+        //when
+        priceCalculatorService.calculatePrice(product);
 
+        Double exceptedPrice = 2500.0 * 0.95;
+        //then
+        Assert.assertEquals(exceptedPrice , product.getDiscountPrice());
+    }
+     @Test
+    public void testShouldReturnWrongPriceAfter5PercentDiscount () {
+        //given
+        Product product = new Product("Wazon", "Stary", Type.FEMALE, 2500.0);
+        productRepository.save(product);
+        PriceCalculatorService priceCalculatorService = new PriceCalculatorService();
+        //when
+        priceCalculatorService.calculatePrice(product);
+
+        Double exceptedPrice = 2500.0;
+        //then
+        Assert.assertNotEquals(exceptedPrice , product.getDiscountPrice());
     }
 
 
 
-
-
     @Test
-    public void testShouldReturnOneProductWithPriceAfterDiscount() {
+    public void testShouldReturnPriceAfter3PercentDiscount () {
         //given
-        Product product1 = new Product("stolik", "kolor dąb sonoma", Type.MALE, 200.0);
-        Product product2 = new Product("kanapa", "sprężyny faliste , 3 poduszki", Type.MALE, 300.0);
-        Product product3 = new Product("telewizor", "nowy", Type.MALE, 400.0);
-        ArrayList<Product> products = new ArrayList<>();
-        Mockito.when(productRepository.getProducts()).thenReturn(products);
-        products.add(product1);
-        products.add(product2);
-        products.add(product3);
-        Double exceptedPriceAfterDiscount = product2.getPrice() * 0.95;
+        Product product = new Product("Wazon", "Stary", Type.FEMALE, 1500.0);
+        productRepository.save(product);
+        PriceCalculatorService priceCalculatorService = new PriceCalculatorService();
         //when
-        productService.findProductByName("kanapa");
+        priceCalculatorService.calculatePrice(product);
+
+        Double exceptedPrice = 1500.0 * 0.97;
         //then
-        Assert.assertEquals(exceptedPriceAfterDiscount, product2.getDiscountPrice());
-
-
+        Assert.assertEquals(exceptedPrice , product.getDiscountPrice());
     }
 
 
-
-
-
     @Test
-    public void testShouldReturnOneProductWithPriceAfterDiscountButExceptedPriceAfterDiscountIsWrong() {
+    public void testShouldReturnWrongPriceAfter3PercentDiscount () {
         //given
-        Product product1 = new Product("stolik", "kolor dąb sonoma", Type.MALE, 200.0);
-        Product product2 = new Product("kanapa", "sprężyny faliste , 3 poduszki", Type.MALE, 300.0);
-        Product product3 = new Product("telewizor", "nowy", Type.MALE, 400.0);
-        ArrayList<Product> products = new ArrayList<>();
-        Mockito.when(productRepository.getProducts()).thenReturn(products);
-        products.add(product1);
-        products.add(product2);
-        products.add(product3);
-        Double exceptedPriceAfterDiscount = product2.getPrice() * 0.50;
+        Product product = new Product("Wazon", "Stary", Type.FEMALE, 1500.0);
+        productRepository.save(product);
+        PriceCalculatorService priceCalculatorService = new PriceCalculatorService();
         //when
-        productService.findProductByName("kanapa");
+        priceCalculatorService.calculatePrice(product);
+
+        Double exceptedPrice = 1500.0;
         //then
-        Assert.assertNotEquals(exceptedPriceAfterDiscount, product2.getDiscountPrice());
-
-
+        Assert.assertNotEquals(exceptedPrice , product.getDiscountPrice());
     }
 
 
 }
 
-*/
 

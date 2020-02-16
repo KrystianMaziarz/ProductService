@@ -25,12 +25,11 @@ public class ProductService {
         Product productByName = productRepository.findByNameIgnoreCase(name);
         productCounterService.setCounterProduct(productByName);
         priceCalculatorService.calculatePrice(productByName);
+        productRepository.save(productByName);
 
         return ProductMapper.mapProductToProductDTO(productByName);
 
     }
-
-
 
 
 }
