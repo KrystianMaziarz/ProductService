@@ -2,10 +2,12 @@ package pl.com.edge.productservice.DTOS;
 
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import pl.com.edge.productservice.model.Counter;
 import pl.com.edge.productservice.model.Product;
 import pl.com.edge.productservice.model.Type;
-
 @Data
+@NoArgsConstructor
 public class ProductDTO  {
 
     private Long id;
@@ -14,18 +16,10 @@ public class ProductDTO  {
     private Type type;
     private Double price;
     private Double discountPrice;
-    private int counter;
+    private Counter counter;
 
 
-    public ProductDTO (Product product) {
-    this.name = product.getName();
-    this.description = product.getDescription();
-    this.type = product.getType();
-    this.price = product.getPrice();
-    this.discountPrice = this.getDiscountPrice();
-    this.counter = product.getCounter();
-    this.id = product.getId();
-    }
+
 
 
 }

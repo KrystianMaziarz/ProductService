@@ -1,15 +1,12 @@
 package pl.com.edge.productservice.model;
 
+import lombok.*;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 @Entity
 public class Product {
@@ -21,16 +18,19 @@ public class Product {
     private String description;
     private Type type;
     private Double price;
-    private int counter;
+    private Double discountPrice;
+    @OneToOne
+    private Counter counter;
+
+
 
     public Product(String name, String description, Type type, Double price) {
         this.name = name;
         this.description = description;
         this.type = type;
         this.price = price;
+
     }
-
-
 
 
 }
