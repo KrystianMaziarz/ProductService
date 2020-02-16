@@ -1,17 +1,12 @@
 package pl.com.edge.productservice.repositories;
 
-import lombok.Getter;
-import lombok.Setter;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import pl.com.edge.productservice.model.Product;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Repository
-@Getter
-@Setter
-public class ProductRepository {
+public interface ProductRepository extends JpaRepository <Product , Long> {
 
-    private List<Product> products = new ArrayList <> ();
+    Product findByName(String name);
+
 }

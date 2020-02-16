@@ -31,11 +31,11 @@ public class ProductserviceApplication implements CommandLineRunner {
         Product hammer = new Product("Młotek" , "Ciesielski" , Type.MALE , 80.0);
         Product cap = new Product ("Kaszkietówka" , "Zielona, młodzieżowa", Type.KID , 45.0);
 
-        productRepository.getProducts().add(dress);
-        productRepository.getProducts().add(boots);
-        productRepository.getProducts().add(toy);
-        productRepository.getProducts().add(sockets);
-        productRepository.getProducts().add(hammer);
-        productRepository.getProducts().add(cap);
+        productRepository.save(dress);
+        productRepository.save(boots);
+        productRepository.save(toy);
+        productRepository.save(sockets);
+        productRepository.save(hammer);
+        productRepository.save(cap);
     }
 }
