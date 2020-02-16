@@ -16,7 +16,7 @@ public class ProductMapper {
       productDTO.setName(product.getName());
       productDTO.setPrice(product.getPrice());
       productDTO.setType(product.getType());
-      productDTO.setCounter(product.getCounter());
+      productDTO.setCounter(product.getCounter().getNumberOfCounter());
       productDTO.setDiscountPrice(product.getDiscountPrice());
 
 

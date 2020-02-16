@@ -1,34 +1,35 @@
 package pl.com.edge.productservice.model;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Data
 @Entity
-@NoArgsConstructor
 public class Counter {
 
 
+
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private int counter = 0;
+    private int numberOfCounter = 0;
 
     @OneToOne
     private Product product;
 
-    public Counter( int counter) {
-        this.counter = counter;
+    public Counter (){
+
+    }
+
+    public Counter(int counter, Product product) {
+        this.numberOfCounter = counter;
+        this.product = product;
     }
 
     public void addCounter() {
 
-        ++counter;
+        ++numberOfCounter;
     }
 
 }

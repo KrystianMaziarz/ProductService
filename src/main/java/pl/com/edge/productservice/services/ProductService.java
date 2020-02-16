@@ -12,17 +12,19 @@ public class ProductService {
 
     private ProductRepository productRepository;
     private ProductCounterService productCounterService;
+    private PriceCalculatorService priceCalculatorService;
 
-    public ProductService(ProductRepository productRepository, ProductCounterService productCounterService) {
+    public ProductService(ProductRepository productRepository, ProductCounterService productCounterService, PriceCalculatorService priceCalculatorService) {
         this.productRepository = productRepository;
         this.productCounterService = productCounterService;
+        this.priceCalculatorService = priceCalculatorService;
     }
 
     public ProductDTO findProductByName(String name) {
 
         Product productByName = productRepository.findByNameIgnoreCase(name);
         productCounterService.setCounterProduct(productByName);
-
+        priceCalculatorService.calculatePrice(productByName);
 
         return ProductMapper.mapProductToProductDTO(productByName);
 

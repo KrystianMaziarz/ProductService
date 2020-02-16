@@ -29,6 +29,7 @@ public class Product {
         this.description = description;
         this.type = type;
         this.price = price;
+        this.counter = new Counter ();
 
     }
 
