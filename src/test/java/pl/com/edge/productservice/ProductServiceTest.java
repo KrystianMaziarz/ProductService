@@ -29,6 +29,40 @@ public class ProductServiceTest {
         Assert.assertEquals(exceptedCounter, product.getCounter().getNumberOfCounter());
 
 
+    } @Test
+    public void testShouldReturnTrueToCounterAndExceptedCounter5() {
+        //given
+        Product product = new Product("Stolik", "Nowy", Type.MALE, 500.0);
+        productRepository.save(product);
+        ProductCounterService productCounterService = new ProductCounterService(productRepository);
+        //when
+        productCounterService.setCounterProduct(product);
+        productCounterService.setCounterProduct(product);
+        productCounterService.setCounterProduct(product);
+        productCounterService.setCounterProduct(product);
+        productCounterService.setCounterProduct(product);
+
+        int exceptedCounter = 5;
+        //then
+        Assert.assertEquals(exceptedCounter, product.getCounter().getNumberOfCounter());
+
+
+    }@Test
+    public void testShouldReturnTrueToCounterAndExceptedCounter50() {
+        //given
+        Product product = new Product("Stolik", "Nowy", Type.MALE, 500.0);
+        productRepository.save(product);
+        ProductCounterService productCounterService = new ProductCounterService(productRepository);
+        //when
+        for (int i = 0; i<50; i++){
+            productCounterService.setCounterProduct(product);
+        }
+
+        int exceptedCounter = 50;
+        //then
+        Assert.assertEquals(exceptedCounter, product.getCounter().getNumberOfCounter());
+
+
     }
 
     @Test

@@ -8,8 +8,6 @@ import javax.persistence.*;
 @Entity
 public class Counter {
 
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
