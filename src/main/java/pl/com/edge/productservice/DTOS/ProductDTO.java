@@ -4,8 +4,8 @@ package pl.com.edge.productservice.DTOS;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import pl.com.edge.productservice.model.Counter;
-import pl.com.edge.productservice.model.Product;
 import pl.com.edge.productservice.model.Type;
+
 @Data
 @NoArgsConstructor
 public class ProductDTO  {

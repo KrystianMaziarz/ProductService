@@ -11,14 +11,17 @@ import pl.com.edge.productservice.repositories.ProductRepository;
 public class ProductService {
 
     private ProductRepository productRepository;
+    private ProductCounterService productCounterService;
 
-    public ProductService(ProductRepository productRepository) {
+    public ProductService(ProductRepository productRepository, ProductCounterService productCounterService) {
         this.productRepository = productRepository;
+        this.productCounterService = productCounterService;
     }
 
     public ProductDTO findProductByName(String name) {
 
         Product productByName = productRepository.findByNameIgnoreCase(name);
+        productCounterService.setCounterProduct(productByName);
 
 
         return ProductMapper.mapProductToProductDTO(productByName);

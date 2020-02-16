@@ -19,7 +19,7 @@ public class Product {
     private Type type;
     private Double price;
     private Double discountPrice;
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Counter counter;
 
 
