@@ -3,7 +3,6 @@ package pl.com.edge.productservice;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import pl.com.edge.productservice.model.Counter;
 import pl.com.edge.productservice.model.Product;
 import pl.com.edge.productservice.model.Type;
 import pl.com.edge.productservice.repositories.ProductRepository;
@@ -26,10 +25,9 @@ public class ProductserviceApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
 
-
-        Product dress = new Product("Sukienka" , "Biała, w kwiatki", Type.FEMALE, 5555.0);
-        Product boots = new Product("Trapery", "Czarne, wygodne" , Type.MALE , 400.0);
-        Product toy = new Product("Robot", "Smokozord", Type.KID , 1500.0);
+        Product dress = new Product("Sukienka", "Biała, w kwiatki", Type.FEMALE, 5555.0);
+        Product boots = new Product("Trapery", "Czarne, wygodne", Type.MALE, 400.0);
+        Product toy = new Product("Robot", "Smokozord", Type.KID, 1500.0);
 
 
         productRepository.save(dress);

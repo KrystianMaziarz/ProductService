@@ -11,7 +11,6 @@ import pl.com.edge.productservice.services.PriceCalculatorService;
 import pl.com.edge.productservice.services.ProductCounterService;
 
 
-
 public class ProductServiceTest {
 
     private ProductRepository productRepository = Mockito.mock(ProductRepository.class);
@@ -33,7 +32,7 @@ public class ProductServiceTest {
     }
 
     @Test
-    public void testShouldReturnFalseBecauseExceptedCounterIsWrong () {
+    public void testShouldReturnFalseBecauseExceptedCounterIsWrong() {
         //given
         Product product = new Product("Stolik", "Nowy", Type.MALE, 500.0);
         productRepository.save(product);
@@ -47,8 +46,9 @@ public class ProductServiceTest {
 
 
     }
+
     @Test
-    public void testShouldReturnPriceAfter5PercentDiscount () {
+    public void testShouldReturnPriceAfter5PercentDiscount() {
         //given
         Product product = new Product("Wazon", "Stary", Type.FEMALE, 2500.0);
         productRepository.save(product);
@@ -58,10 +58,11 @@ public class ProductServiceTest {
 
         Double exceptedPrice = 2500.0 * 0.95;
         //then
-        Assert.assertEquals(exceptedPrice , product.getDiscountPrice());
+        Assert.assertEquals(exceptedPrice, product.getDiscountPrice());
     }
-     @Test
-    public void testShouldReturnWrongPriceAfter5PercentDiscount () {
+
+    @Test
+    public void testShouldReturnWrongPriceAfter5PercentDiscount() {
         //given
         Product product = new Product("Wazon", "Stary", Type.FEMALE, 2500.0);
         productRepository.save(product);
@@ -71,13 +72,12 @@ public class ProductServiceTest {
 
         Double exceptedPrice = 2500.0;
         //then
-        Assert.assertNotEquals(exceptedPrice , product.getDiscountPrice());
+        Assert.assertNotEquals(exceptedPrice, product.getDiscountPrice());
     }
 
 
-
     @Test
-    public void testShouldReturnPriceAfter3PercentDiscount () {
+    public void testShouldReturnPriceAfter3PercentDiscount() {
         //given
         Product product = new Product("Wazon", "Stary", Type.FEMALE, 1500.0);
         productRepository.save(product);
@@ -87,12 +87,12 @@ public class ProductServiceTest {
 
         Double exceptedPrice = 1500.0 * 0.97;
         //then
-        Assert.assertEquals(exceptedPrice , product.getDiscountPrice());
+        Assert.assertEquals(exceptedPrice, product.getDiscountPrice());
     }
 
 
     @Test
-    public void testShouldReturnWrongPriceAfter3PercentDiscount () {
+    public void testShouldReturnWrongPriceAfter3PercentDiscount() {
         //given
         Product product = new Product("Wazon", "Stary", Type.FEMALE, 1500.0);
         productRepository.save(product);
@@ -102,7 +102,7 @@ public class ProductServiceTest {
 
         Double exceptedPrice = 1500.0;
         //then
-        Assert.assertNotEquals(exceptedPrice , product.getDiscountPrice());
+        Assert.assertNotEquals(exceptedPrice, product.getDiscountPrice());
     }
 
 
