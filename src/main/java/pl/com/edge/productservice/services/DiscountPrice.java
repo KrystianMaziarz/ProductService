@@ -1,21 +1,29 @@
+/*
 package pl.com.edge.productservice.services;
 
 import pl.com.edge.productservice.model.Product;
-import pl.com.edge.productservice.model.Type;
 
 class DiscountPrice {
     static void setPriceAfterDiscount(Product product) {
 
-        if (product.getType().equals(Type.FEMALE) || product.getType().equals(Type.MALE)) {
+
+        if (product.getPrice() >= 2000) {
             if (product.getPrice() != null) {
                 product.setDiscountPrice(product.getPrice() * 0.95);
             }
         }
-        if (product.getType().equals(Type.KID)) {
+        if (product.getPrice() > 500 && product.getPrice() < 1999) {
             if (product.getPrice() != null) {
                 product.setDiscountPrice(product.getPrice() * 0.90);
             }
         }
+        if (product.getPrice() < 500) {
+            if (product.getPrice() != null) {
+                product.setDiscountPrice(product.getPrice());
+            }
 
+
+        }
     }
 }
+*/

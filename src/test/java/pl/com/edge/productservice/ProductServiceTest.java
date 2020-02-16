@@ -20,13 +20,17 @@ public class ProductServiceTest {
     @Mock
     private ProductRepository productRepository;
     private ProductService productService;
-
-    @Before
+}
+   /* @Before
     public void setUp() throws Exception {
         productService = new ProductService(productRepository);
-    }
+  }
 
-    @Test
+
+*/
+/*
+
+  @Test
     public void testShouldReturnOneProductWithCounter1() {
         //given
         Product product1 = new Product("stolik", "kolor dąb sonoma", Type.MALE, 200.0);
@@ -43,7 +47,12 @@ public class ProductServiceTest {
         //then
         Assert.assertEquals(exceptedCounter, product2.getCounter());
 
+
+
     }
+
+
+
 
     @Test
     public void testShouldReturnOneProductWithCounterButExceptedCounterIsWrong() {
@@ -62,7 +71,12 @@ public class ProductServiceTest {
         //then
         Assert.assertNotEquals(exceptedCounter, product2.getCounter());
 
+
+
     }
+
+
+
 
 
     @Test
@@ -84,6 +98,10 @@ public class ProductServiceTest {
 
 
     }
+
+
+
+
 
     @Test
     public void testShouldReturnOneProductWithPriceAfterDiscountButExceptedPriceAfterDiscountIsWrong() {
@@ -107,3 +125,6 @@ public class ProductServiceTest {
 
 
 }
+
+*/
+

@@ -8,6 +8,7 @@ import pl.com.edge.productservice.model.Type;
 @Data
 public class ProductDTO  {
 
+    private Long id;
     private String name;
     private String description;
     private Type type;
@@ -21,8 +22,9 @@ public class ProductDTO  {
     this.description = product.getDescription();
     this.type = product.getType();
     this.price = product.getPrice();
-    this.discountPrice = product.getDiscountPrice();
+    this.discountPrice = this.getDiscountPrice();
     this.counter = product.getCounter();
+    this.id = product.getId();
     }
 
 

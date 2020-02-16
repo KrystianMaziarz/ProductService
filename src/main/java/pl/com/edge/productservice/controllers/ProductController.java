@@ -18,14 +18,15 @@ public class ProductController {
     }
 
 
-    @GetMapping ("/one")
+   @GetMapping ("/one")
     public ResponseEntity <ProductDTO> getOneProduct (@RequestParam String name) {
         ProductDTO productByName = productService.findProductByName(name);
         if (productByName!=null){
-        return ResponseEntity.ok (productByName);
+            return ResponseEntity.ok (productByName);
         }
-       throw new NoSuchElementException("Brak Przedmiotu o Podanej Nazwie");
+        throw new NoSuchElementException("Brak Przedmiotu o podanej nazwie");
 
     }
+
 
 }
