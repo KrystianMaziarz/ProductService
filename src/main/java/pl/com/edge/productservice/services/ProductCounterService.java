@@ -14,7 +14,7 @@ public class ProductCounterService {
 
     }
 
-     public Product setCounterProduct(Product product) {
+     Product setCounterProduct(Product product) {
 
         product.getCounter().addCounter();
 

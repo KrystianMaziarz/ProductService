@@ -1,35 +1,23 @@
-/*
 package pl.com.edge.productservice.services;
+import org.springframework.stereotype.Service;
 import pl.com.edge.productservice.DTOS.ProductDTO;
 import pl.com.edge.productservice.model.Product;
+import pl.com.edge.productservice.repositories.ProductRepository;
 
-
+@Service
 public class PriceCalculatorService {
 
 
-    public double calculateDiscountPrice(ProductDTO productDTO) {
+    public void calculatePrice(Product product) {
 
-        {
-
-
-            if (productDTO.getPrice() >= 2000) {
-                if (productDTO.getPrice() != null) {
-                    productDTO.setDiscountPrice(productDTO.getPrice() * 0.95);
-                }
-            }
-            if (productDTO.getPrice() > 500 && productDTO.getPrice() < 1999) {
-                if (productDTO.getPrice() != null) {
-                    productDTO.setDiscountPrice(productDTO.getPrice() * 0.90);
-                }
-            }
-
-
-
-            }
+        if (product.getPrice() > 500 && product.getPrice() < 2000) {
+            product.setDiscountPrice(product.getPrice() * 0.90);
+        }
+        if (product.getPrice() >= 2000) {
+            product.setDiscountPrice(product.getPrice() * 0.95);
+        }
+        if (product.getPrice() < 500) {
+            product.setDiscountPrice(product.getPrice());
         }
     }
-
-
-
-
-*/
+}

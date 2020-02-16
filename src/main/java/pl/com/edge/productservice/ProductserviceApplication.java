@@ -29,7 +29,7 @@ public class ProductserviceApplication implements CommandLineRunner {
 
         Product dress = new Product("Sukienka" , "Biała, w kwiatki", Type.FEMALE, 5555.0);
         Product boots = new Product("Trapery", "Czarne, wygodne" , Type.MALE , 400.0);
-        Product toy = new Product("Robot", "Smokozord", Type.KID , 2500.0);
+        Product toy = new Product("Robot", "Smokozord", Type.KID , 1500.0);
 
 
         productRepository.save(dress);
